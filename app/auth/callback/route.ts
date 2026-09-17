@@ -17,24 +17,20 @@ export async function GET(request: Request) {
   const { error } =
     await supabase.auth.exchangeCodeForSession(code)
 
-  if (error) {
-    console.error(
-      'AUTH CALLBACK ERROR:',
-      error.message
-    )
-
-    return new NextResponse(
-      'El enlace de recuperación no es válido o ha expirado. Solicita un nuevo enlace para continuar.',
-      {
-        status: 400,
-        headers: {
-          'Content-Type': 'text/plain; charset=utf-8',
-        },
-      }
-    )
-  }
-
-  return NextResponse.redirect(
-    new URL('/update-password', requestUrl.origin)
+if (error) {
+  console.error(
+    'AUTH CALLBACK ERROR:',
+    error.message
   )
+
+  return new NextResponse(
+    'El enlace de recuperación no es válido o ha expirado. Solicita un nuevo enlace para continuar.',
+    {
+      status: 400,
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+      },
+    }
+  )
+}
 }
