@@ -158,7 +158,6 @@ export async function signOut() {
 }
 
 export async function resetPassword(
-  _prevState: AuthState,
   formData: FormData
 ): Promise<AuthState> {
   const email = String(formData.get('email') ?? '')
@@ -181,16 +180,20 @@ export async function resetPassword(
 
   const supabase = await createClient()
 
-  const { error } = await supabase.auth.resetPasswordForEmail(
-    email,
-    {
-      redirectTo:
-        'https://next-supabase-auth-felidae1.vercel.app/auth/callback?next=/update-password',
-    }
-  )
+  const { error } =
+    await supabase.auth.resetPasswordForEmail(
+      email,
+      {
+        redirectTo:
+          'https://next-supabase-auth-felidae1.vercel.app/auth/callback?next=/update-password',
+      }
+    )
 
   if (error) {
-    console.error('RESET PASSWORD ERROR:', error)
+    console.error(
+      'RESET PASSWORD ERROR:',
+      error.message
+    )
 
     return {
       error: error.message,
