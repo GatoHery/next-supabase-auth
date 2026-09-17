@@ -184,7 +184,8 @@ export async function resetPassword(
   const { error } = await supabase.auth.resetPasswordForEmail(
     email,
     {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/update-password`,
+      redirectTo:
+        'https://next-supabase-auth-felidae1.vercel.app/auth/callback?next=/update-password',
     }
   )
 
