@@ -7,9 +7,6 @@ export function createClient() {
     {
       auth: {
         flowType: 'pkce',
-        experimental: {
-          appendPkceFlowIdToRedirects: true,
-        },
       },
     }
   )

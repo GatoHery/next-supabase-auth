@@ -30,13 +30,13 @@ setLoading(true)
 
 const supabase = createClient()
 
-const { error } =
-  await supabase.auth.resetPasswordForEmail(
-    normalizedEmail,
-    {
-      redirectTo: `${window.location.origin}/auth/callback`,
-    }
-  )
+const { error } = await supabase.auth.resetPasswordForEmail(
+  email,
+  {
+    redirectTo:
+      'https://next-supabase-auth-felidae1.vercel.app/auth/callback?next=/update-password',
+  }
+)
 
 setLoading(false)
 
